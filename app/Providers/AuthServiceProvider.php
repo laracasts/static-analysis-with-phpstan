@@ -27,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
             return;
         }
 
-        Auth::login(User::latest()->first());
+        if ($user = User::latest()->first()) {
+            Auth::login($user);
+        }
     }
 }
