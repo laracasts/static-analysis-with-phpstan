@@ -15,9 +15,9 @@ class HomeController extends Controller
             'timezone' => 'Z',
         ];
 
-        if ($request->user()->hasConfigFile()) {
+        if ($request->user()->config) {
             $fileContent = Storage::get($request->user()->config);
-            $config = [...$config, ...json_decode($fileContent, true)];
+            $config = array_merge($config, json_decode($fileContent, true));
         }
 
         return view('home')->with([
