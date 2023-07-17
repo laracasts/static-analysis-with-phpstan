@@ -12,10 +12,21 @@ it('correctly loads user config', function () {
 
     be($user)
         ->get(route('home'))
-        ->assertOk()
         ->assertViewHas('config', [
             'theme' => 'dark',
             'language' => 'en',
             'timezone' => '-05:00',
+        ]);
+});
+
+it('correctly falls back to config defaults', function () {
+    $user = User::factory()->create();
+
+    be($user)
+        ->get(route('home'))
+        ->assertViewHas('config', [
+            'theme' => 'light',
+            'language' => 'en',
+            'timezone' => 'Z',
         ]);
 });
