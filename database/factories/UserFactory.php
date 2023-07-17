@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -23,6 +24,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'config' => null,
         ];
     }
 
@@ -34,5 +36,19 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function config(string $theme = 'light', string $language = 'en', string $timezone = 'Z'): self
+    {
+        Storage::fake();
+
+        $fileName = Str::uuid();
+        Storage::put($fileName, json_encode([
+            'theme' => $theme,
+            'language' => $language,
+            'timezone' => $timezone,
+        ]));
+
+        return $this->state(['config' => $fileName]);
     }
 }
