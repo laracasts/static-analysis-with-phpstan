@@ -22,27 +22,24 @@ class HomeController extends Controller
             'config' => $config,
         ]);
 
-        $user = $request->user();
-        assert($user instanceof User);
-
-        if (!$user->config) {
-            return $response($config, $user->name);
+        if (!$request->user()->config) {
+            return $response($config, $request->user()->name);
         }
 
-        $fileContent = Storage::get($user->config);
+        $fileContent = Storage::get($request->user()->config);
 
         if (!$fileContent) {
-            return $response($config, $user->name);
+            return $response($config, $request->user()->name);
         }
 
         $json = json_decode($fileContent, true);
 
         if (! is_array($json)) {
-            return $response($config, $user->name);
+            return $response($config, $request->user()->name);
         }
 
         $config = array_merge($config, $json);
 
-        return $response($config, $user->name);
+        return $response($config, $request->user()->name);
     }
 }

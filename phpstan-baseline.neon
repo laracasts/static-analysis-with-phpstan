@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access property \\$config on App\\\\Models\\\\User\\|null\\.$#"
+			count: 2
+			path: app/Http/Controllers/HomeController.php
+
+		-
+			message: "#^Cannot access property \\$name on App\\\\Models\\\\User\\|null\\.$#"
+			count: 4
+			path: app/Http/Controllers/HomeController.php
