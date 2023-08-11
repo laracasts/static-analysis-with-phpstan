@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'email' => 'luke@laracasts.com',
             'name' => 'Luke Downing',
-            'config' => 'luke@laracasts.com/config.json'
+            'config' => 'luke@laracasts.com/config.json',
         ]);
     }
 }

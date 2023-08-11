@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,18 +16,18 @@ class HomeController extends Controller
             'timezone' => 'Z',
         ];
 
-        $response = fn($config, $name) => view('home')->with([
+        $response = fn ($config, $name) => view('home')->with([
             'name' => $name,
             'config' => $config,
         ]);
 
-        if (!$request->user()->config) {
+        if (! $request->user()->config) {
             return $response($config, $request->user()->name);
         }
 
         $fileContent = Storage::get($request->user()->config);
 
-        if (!$fileContent) {
+        if (! $fileContent) {
             return $response($config, $request->user()->name);
         }
 
