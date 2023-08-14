@@ -2,6 +2,7 @@
 
 namespace App\Actions\ProcessPodcast;
 
+use App\Enums\PodcastPlatform;
 use Closure;
 
 /**
@@ -13,6 +14,11 @@ use Closure;
  */
 class UploadToPodcastPlatforms
 {
+    /**
+    * @param non-empty-string $path
+    * @param list<PodcastPlatform> $podcastPlatforms
+    * @param Closure(int): (bool|null) $progressCallback
+     */
     public function __invoke(
         string $path,
         array $podcastPlatforms,

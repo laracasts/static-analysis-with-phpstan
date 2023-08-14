@@ -9,9 +9,15 @@ namespace App\Actions\ProcessPodcast;
  */
 class JoinClips
 {
+    /**
+    * @param list<non-empty-string> $clips
+    * @param array{type?: 'sequential'|'parallel', crossfade?: bool} $options
+    * @return non-empty-string
+     */
     public function __invoke(
         array $clips,
         array $options = []
     ): string {
+        return 'foo';
     }
 }
