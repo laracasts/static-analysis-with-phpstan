@@ -38,5 +38,9 @@ class ProcessPodcast implements ShouldQueue
         );
 
         $response = $announceOnSocialMedia($path, TwitterOrXOrSomething::class);
+
+        if ($response->statusCode !== 200) {
+            $this->release(60);
+        }
     }
 }
