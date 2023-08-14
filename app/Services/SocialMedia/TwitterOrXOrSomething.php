@@ -8,10 +8,6 @@ class TwitterOrXOrSomething implements SocialMediaPlatform
 {
     public function post(string $content): Result
     {
-        return new Result(
-            $this,
-            200,
-            ['id' => '1234567890'],
-        );
+        return new Result($this, 200);
     }
 }
